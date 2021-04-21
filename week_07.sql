@@ -86,7 +86,7 @@ where date(return_date)  between '2005-05-15' AND '2005-05-31';*/
 
 /*6.Write a subquery to show which movies are rented below the average price for all movies*/
 /*FOr claculating avg rental rate for movies we will use :*/
-/*SELECT avg(rental_rate) from film;*/
+SELECT avg(rental_rate) from film;
 
 /*For selecting movies that are rented below the average price for all movies*/
 /*select title
@@ -95,12 +95,27 @@ WHERE rental_rate < (SELECT avg(rental_rate) FROM film);*/
 
 
 /*7.Write a join statement to show which moves are rented below the average price for all movies.*/
+/*Using Self join*/
 
 /*select  title, rental_rate
 from film  f
 join 
 (select avg(rental_rate) avg_rental_rate from film) as f2 on f.rental_rate<f2.avg_rental_rate
 order by rental_rate asc;*/
+
+/*USing JOINS*/
+
+/*select round(AVG(p.amount),2) as avg_rental, f.title
+from film as f
+join inventory as i
+on f.film_id = i. film_id
+join rental as r
+on i.inventory_id = r.inventory_id
+join payment as p
+on p.rental_id = r.rental_id
+where rental_rate < 2.98
+group by f.title;*/
+
 
 /*8.Perform an explain plan on 6 and 7, and describe what you’re seeing and important ways 
 they differ*/
